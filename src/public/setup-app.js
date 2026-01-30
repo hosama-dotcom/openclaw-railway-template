@@ -1,6 +1,3 @@
-// Served at /setup/app.js
-// No fancy syntax: keep it maximally compatible.
-
 (function () {
   var statusEl = document.getElementById('status');
   var authGroupEl = document.getElementById('authGroup');
@@ -56,12 +53,11 @@
   function refreshStatus() {
     setStatus('Loading...');
     return httpJson('/setup/api/status').then(function (j) {
-      var ver = j.moltbotVersion ? (' | ' + j.moltbotVersion) : '';
-      setStatus((j.configured ? 'Configured - open /moltbot' : 'Not configured - run setup below') + ver);
+      var ver = j.openclawVersion ? (' | ' + j.openclawVersion) : '';
+      setStatus((j.configured ? 'Configured - open /openclaw' : 'Not configured - run setup below') + ver);
       renderAuth(j.authGroups || []);
-      // If channels are unsupported, surface it for debugging.
       if (j.channelsAddHelp && j.channelsAddHelp.indexOf('telegram') === -1) {
-        logEl.textContent += '\nNote: this moltbot build does not list telegram in `channels add --help`. Telegram auto-add will be skipped.\n';
+        logEl.textContent += '\nNote: this openclaw build does not list telegram in `channels add --help`. Telegram auto-add will be skipped.\n';
       }
 
     }).catch(function (e) {
@@ -99,7 +95,6 @@
     });
   };
 
-  // Pairing approve helper
   var pairingBtn = document.getElementById('pairingApprove');
   if (pairingBtn) {
     pairingBtn.onclick = function () {
