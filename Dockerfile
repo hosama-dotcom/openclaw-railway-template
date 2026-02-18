@@ -9,7 +9,8 @@ RUN apt-get update \
     procps \
     python3 \
     build-essential \
-  && rm -rf /var/lib/apt/lists/*
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g openclaw@latest
 
